@@ -42,7 +42,8 @@
 		},
 		methods:{
 			confirm(teamname,people){
-				window.location.href = '#/playground/'+teamname+'/'+people;
+
+				window.location.href = '#/playground/'+teamname+'/'+people+'/created';
 			}
 		}
 	}

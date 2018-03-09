@@ -20,7 +20,7 @@ export default new Router({
     },
 
     {
-      path:'/playground/:teamname/:people',
+      path:'/playground/:teamname/:people/:flag',
       name:'playground',
       component:PlayGround
     }

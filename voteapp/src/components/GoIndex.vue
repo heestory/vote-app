@@ -10,10 +10,10 @@
         <div class="form-group">
           <label class="col-sm-3 control-label">TeamName</label>
           <div class="col-sm-7">
-            <input class="form-control" id="" type="text" placeholder="Your Team">
+            <input class="form-control" id="" type="text" placeholder="Your Team" v-model:value="teamname">
           </div>
           <div class="col-sm-2">
-            <button class="btn btn-primary" type="button" >Go</button>
+            <button class="btn btn-primary" type="button" @click="findTeam">Go</button>
           </div>
 
         </div>
@@ -30,8 +30,34 @@
 </template>
 
 <script>
+import db from './firebaseInit'
   export default {
-
+    name:'goIndex',
+    data (){
+      return{
+        msg:'hello',
+        teamname:'',
+        people:0
+      }
+    },
+    methods:{
+      findTeam: function(){
+        db.collection('voteapp').where('teamname','==',this.teamname).get()
+        .then(querySnapshot => {
+          var tempWinner = [];
+          querySnapshot.forEach(doc => {
+           
+              this.people=doc.data().people;
+              console.log(this.people);
+              console.log(this.teamname);
+            
+          })
+        }).then(()=>{
+          // this.$router.push({name:'playground',params:{teamname:this.this.teamname,}})
+          window.location.href = '#/playground/'+this.teamname+'/'+this.people+'/go';
+        })
+      }
+    }
   }
 </script>
 
